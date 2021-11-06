@@ -1,4 +1,45 @@
-{% extends "./base.html" %} 
-{% load static %} 
-{% block title %}Home{% endblock%}
-{% block content %}{% endblock %}
+{% extends "./base.html" %} {% load static %} {% block title %} Home
+{%endblock%} {% block content %}
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Welcome to Store</h1>
+      <p class="lead text-muted">
+        The shop where you can buy anything with great deal.
+      </p>
+      <p>
+        <a href="#" class="btn btn-danger my-2">Create an account</a>
+      </p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <h2 class="bg-danger text-light p-2 text-uppercase">All Books</h2>
+    <hr />
+    {% for product in products %}
+    <div class="card" style="width: 70vh">
+      <div class="row">
+        <div class="col-md-5">
+          <img
+            src="{{product.image.url}}"
+            class="img-thumbnail"
+            alt="loading..."
+          />
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{product.description}}</p>
+          </div>
+        </div>
+        <a href="#" class="btn btn-success"
+          >{% if product.in_stock %} Buy Now (price : ${{product.price}})
+          {%else%}Out of Stock{%endif%}
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}}
+</section>
+{% endblock %}
