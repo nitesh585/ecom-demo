@@ -8,17 +8,17 @@
         The shop where you can buy anything with great deal.
       </p>
       <p>
-        <a href="#" class="btn btn-danger my-2">Create an account</a>
+        <a href="/#" class="btn btn-danger my-2">Create an account</a>
       </p>
     </div>
   </div>
 </section>
 <section>
   <div class="container">
-    <h2 class="bg-danger text-light p-2 text-uppercase">All Books</h2>
+    <h2 class="bg-danger text-light p-2 ml-4 text-uppercase">All Books</h2>
     <hr />
     {% for product in products %}
-    <div class="card" style="width: 70vh">
+    <div class="card" style="width: 50vh">
       <div class="row">
         <div class="col-md-5">
           <img
@@ -28,18 +28,20 @@
           />
         </div>
         <div class="col-md-7">
-          <div class="card-body">
-            <h5 class="card-title">{{ product.title }}</h5>
-            <p class="card-text">{{product.description}}</p>
-          </div>
+          <div class="card-body"></div>
+          <a
+            class="card-title text-dark text-decoration-none"
+            style="font-size: 140%"
+            href="{{product.get_absolute_url}}"
+            >{{ product.title }}</a
+          >
+          <a href="#" class="btn btn-success p-1" style="width: 80%"
+            >{% if product.in_stock %} In Stock {%else%}Out of Stock{%endif%}
+          </a>
         </div>
-        <a href="#" class="btn btn-success"
-          >{% if product.in_stock %} Buy Now (price : ${{product.price}})
-          {%else%}Out of Stock{%endif%}
-        </a>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}}
 </section>
 {% endblock %}
