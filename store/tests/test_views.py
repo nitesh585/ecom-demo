@@ -1,7 +1,6 @@
 from unittest.case import skip
 
 from django.contrib.auth.models import User
-from django.http import response
 from django.http.request import HttpRequest
 from django.test import Client, TestCase
 from django.test.client import RequestFactory
@@ -64,9 +63,17 @@ class TestSkip(TestCase):
     def test_view_function(self):
         """Test Homepage HTML using FactoryRequest"""
 
-        request = self.factory.get("/item/machine-learning")
+        request = self.factory.get("/machine-learning")
         response = all_products(request)
         html = response.content.decode("utf-8")
 
         self.assertTrue(html.startswith("\n<!DOCTYPE html>\n"))
         self.assertEqual(response.status_code, 200)
+
+    def test_url_allowed_hosts(self):
+        """Test Allowed Hosts"""
+
+        response = self.client.get("/", HOST_HOST="noaddress.com")
+        self.assertTrue(response.status_code, 400)
+        response = self.client.get("/", HOST_HOST="yourcompany.com")
+        self.assertTrue(response.status_code, 200)
