@@ -16,15 +16,28 @@
               </h6>
               <p class="card-text">{{product.description}}</p>
 
+              <label for="select">Qty</label>
+              <select id="select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
               <div
                 class="buy d-flex justify-content-between align-items-center"
               >
                 <div class="price text-success">
                   <h5 class="mt-4">Price: ${{product.price}}</h5>
                 </div>
-                <a href="#" class="btn btn-danger mt-3"
-                  ><i class="fas fa-shopping-cart"></i> Add to Cart</a
+
+                <button
+                  class="btn btn-warning mt-3"
+                  type="button"
+                  id="add-button"
+                  value="{{product.id}}"
                 >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
@@ -33,5 +46,28 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).on("click", "#add-button", function(e){
+      e.preventDefault();
+
+      $.ajax({
+          type:"POST",
+          url:"{% url "basket:basket_add" %}",
+          data: {
+              productid: $("#add-button").val(),
+              productqty: $('#select option:selected').text(),
+              csrfmiddlewaretoken:"{{ csrf_token }}",
+              action:"post"
+          },
+          success: function(json){
+
+          },
+            error: function(xhr, errmsg, err){
+
+            }
+      })
+  })
+</script>
 
 {% endblock content %}
