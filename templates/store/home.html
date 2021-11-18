@@ -17,6 +17,7 @@
   <div class="container">
     <h2 class="bg-danger text-light p-2 ml-4 text-uppercase">All Books</h2>
     <hr />
+    <div class="d-flex" >
     {% for product in products %}
     <div class="card" style="width: 50vh">
       <div class="row">
@@ -42,6 +43,7 @@
       </div>
     </div>
     {% endfor %}
+  </div>
   </div>
 </section>
 {% endblock %}
