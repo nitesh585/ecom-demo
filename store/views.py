@@ -8,7 +8,7 @@ def categories(request):
 
 
 def all_products(request):
-    products = Product.objects.all()
+    products = Product.products.all()
     return render(request, "store/home.html", {"products": products})
 
 
@@ -19,7 +19,7 @@ def product_details(request, slug):
 
 def category_details(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    products = Product.objects.filter(category=category)
+    products = Product.products.filter(category=category)
     return render(
         request,
         "store/products/category_details.html",
