@@ -1,49 +1,71 @@
-{% extends '../base.html' %} 
-{% load static %} 
-
-{% block title %}Basket {% endblock %} 
-
-{% block content %}
+{% extends '../base.html' %} {% load static %} {% block title %}Basket {%endblock %} {% block content %}
 <h1 class="p-2 text-center bg-light m-3 mt-4">Shopping Basket</h1>
-    <div class="container" >
-    {% for item in basket %} 
-        {% with product=item.product %}
-                <div class="card" style="width: 100%;">
-                    <div class="row">
-                        <div class="col"> 
-                            <img class="card-img" src="{{product.image.url}}" alt="Card image cap">
-                        </div>
-                        <div class="col-9 card-body">
-                            <div class="row pb-3">
-                                <div class="col"> <h4> {{product.title}} </h4> </div>
-                            </div>
-                            <div class="row">
-                                <div class="col p-2">{{product.description}}</div>
-                            </div>
-                            <div class="row pt-3">
-                                <div class="col-2">Price: ${{product.price}}</div>
-                                <div class="col-2">
-                                    <label for="select">Qty</label>
-                                    <select id="select">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                                <div class="col-3">Total Price: ${{item.total_price}}</div>
-                                <div class="col-1"><button class="btn btn-warning" id="{{product.id}}" >Update</button></div>
-                                <div class="col-1"><button class="btn btn-danger"  id="{{product.id}}" >Delete</button></div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-        {% endwith %}
-    {% endfor %} 
+<div class="container">
+  {% for item in basket %} {% with product=item.product %}
+  <div class="card" style="width: 100%">
+    <div class="row">
+      <div class="col">
+        <img
+          class="card-img"
+          src="{{product.image.url}}"
+          alt="Card image cap"
+        />
+      </div>
+      <div class="col-9 card-body">
+        <div class="row pb-3">
+          <div class="col"><h4>{{product.title}}</h4></div>
+        </div>
+        <div class="row">
+          <div class="col p-2">{{product.description}}</div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-2">Price: ${{product.price}}</div>
+          <div class="col-2">
+            <label for="select">Qty</label>
+            <select id="select">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="col-3">Total Price: ${{item.total_price}}</div>
+          <div class="col-1">
+            <button class="btn btn-warning" id="{{product.id}}">Update</button>
+          </div>
+          <div class="col-1">
+            <button class="btn btn-danger delete-button" id='delete-button' data-index="{{product.id}}">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endwith %} {% endfor %}
 
-    <div class="d-flex flex-row-reverse" >
-        <h3 >Sub total: ${{basket.get_total_price}} </h3>
-    </div>
-    </div>
- {% endblock %}
+  <div class="d-flex flex-row-reverse">
+    <h3>Sub total: ${{basket.get_total_price}}</h3>
+  </div>
+</div>
+
+<script>
+  $(document).on("click", ".delete-button", function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type:"POST",
+        url:"{% url "basket:basket_delete" %}",
+        data: {
+            productid: $(this).data('index'),
+            csrfmiddlewaretoken:"{{ csrf_token }}",
+            action:"post"
+        },
+        success: function(json){
+        },
+        error: function(xhr, errmsg, err){
+
+        }
+      })
+  })
+</script>
+
+{% endblock content%}

@@ -26,7 +26,7 @@ class Basket:
                 "price": str(product.price),
                 "qty": int(product_qty),
             }
-        self.session.modified = True
+        self.save()
 
     def __len__(self):
         "get the basket data and count the qty of items"
@@ -51,4 +51,17 @@ class Basket:
             yield item
 
     def get_total_price(self):
-        return sum(Decimal(item['price'])*item['qty'] for item in self.basket.values())
+        return sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
+
+    def delete(self, product_id):
+        """
+        Delete item from session data
+        """
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save()
+
+    def save(self):
+        self.session.modified = True
