@@ -21,12 +21,40 @@ class Basket:
         """
         product_id = str(product.id)
 
-        if product_id not in self.basket:
+        if product_id in self.basket:
+            self.basket[product_id]["qty"] = int(product_qty)
+        else:
             self.basket[product_id] = {
                 "price": str(product.price),
                 "qty": int(product_qty),
             }
         self.save()
+
+    def get_total_price(self):
+        return sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
+
+    def delete(self, product_id):
+        """
+        Delete item from session data
+        """
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save()
+
+    def update(self, product_id, product_qty):
+        """
+        Update qty from session data
+        """
+
+        if product_id in self.basket:
+            self.basket[product_id]["qty"] = int(product_qty)
+
+            basket = self.basket.copy()
+            item_price = Decimal(basket[product_id]["price"]) * int(product_qty)
+            self.save()
+            return str(item_price)
 
     def __len__(self):
         "get the basket data and count the qty of items"
@@ -47,21 +75,7 @@ class Basket:
         for item in basket.values():
             item["price"] = Decimal(item["price"])
             item["total_price"] = item["price"] * item["qty"]
-
             yield item
-
-    def get_total_price(self):
-        return sum(
-            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
-        )
-
-    def delete(self, product_id):
-        """
-        Delete item from session data
-        """
-        if product_id in self.basket:
-            del self.basket[product_id]
-            self.save()
 
     def save(self):
         self.session.modified = True

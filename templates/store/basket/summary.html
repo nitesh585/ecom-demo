@@ -1,8 +1,13 @@
-{% extends '../base.html' %} {% load static %} {% block title %}Basket {%endblock %} {% block content %}
+{% extends '../base.html' %} {% load static %} {% block title %}Basket
+{%endblock %} {% block content %}
 <h1 class="p-2 text-center bg-light m-3 mt-4">Shopping Basket</h1>
 <div class="container">
   {% for item in basket %} {% with product=item.product %}
-  <div class="card product-item" data-index="{{product.id}}" style="width: 100%">
+  <div
+    class="card product-item"
+    data-index="{{product.id}}"
+    style="width: 100%"
+  >
     <div class="row">
       <div class="col">
         <img
@@ -22,19 +27,32 @@
           <div class="col-2">Price: ${{product.price}}</div>
           <div class="col-2">
             <label for="select">Qty</label>
-            <select id="select">
+            <select id="select{{product.id}}">
+              <option selected disable hidden>{{item.qty}}</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
             </select>
           </div>
-          <div class="col-3">Total Price: ${{item.total_price}}</div>
-          <div class="col-1">
-            <button class="btn btn-warning" id="{{product.id}}">Update</button>
+          <div class="col-3" id="total{{product.id}}">
+            Total Price: ${{item.total_price}}
           </div>
           <div class="col-1">
-            <button class="btn btn-danger delete-button" id='delete-button' data-index="{{product.id}}">Delete</button>
+            <button
+              class="btn btn-warning update-button"
+              data-index="{{product.id}}"
+            >
+              Update
+            </button>
+          </div>
+          <div class="col-1">
+            <button
+              class="btn btn-danger delete-button"
+              data-index="{{product.id}}"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
@@ -43,7 +61,7 @@
   {% endwith %} {% endfor %}
 
   <div class="d-flex flex-row-reverse">
-    <h3 id="sub-total" >Sub total: ${{basket.get_total_price}}</h3>
+    <h3 id="sub-total">Sub total: ${{basket.get_total_price}}</h3>
   </div>
 </div>
 
@@ -61,8 +79,41 @@
         },
         success: function(json){
             $('.product-item[data-index="'+prodid+'"]').remove();
-            document.getElementById('sub-total').innerHTML = "Sub total: $"+ json['total_price']
+            if(json['total_price'] == 0 ){
+                document.getElementById('sub-total').innerHTML = ""
+            }else{
+                document.getElementById('sub-total').innerHTML = "Sub total: $"+ json['total_price']
+            }
             document.getElementById('basket-qty').innerHTML = json['qty']
+        },
+        error: function(xhr, errmsg, err){
+
+        }
+      })
+  })
+
+  // update items
+  $(document).on("click", ".update-button", function(e){
+      e.preventDefault();
+      var prodid = $(this).data('index');
+
+      $.ajax({
+        type:"POST",
+        url:"{% url "basket:basket_update" %}",
+        data: {
+            productid: prodid,
+            productqty: $('#select'+prodid+ ' option:selected').text(),
+            csrfmiddlewaretoken:"{{ csrf_token }}",
+            action:"post"
+        },
+        success: function(json){
+            if(json['total_price'] == 0 ){
+                document.getElementById('sub-total').innerHTML = ""
+            }else{
+                document.getElementById('sub-total').innerHTML = "Sub total: $"+ json['total_price']
+            }
+            document.getElementById('basket-qty').innerHTML = json['qty']
+            document.getElementById('total'+prodid).innerHTML = "Total Price: $" + json['item_price']
         },
         error: function(xhr, errmsg, err){
 
