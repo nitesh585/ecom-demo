@@ -23,7 +23,7 @@ class TestProductModel(TestCase):
     def setUp(self) -> None:
         Category.objects.create(name="book", slug="book")
         User.objects.create(username="admin")
-        self.data1 = Product.objects.create(
+        self.data1 = Product.products.create(
             category_id=1,
             title="Machine learning",
             created_by_id=1,
