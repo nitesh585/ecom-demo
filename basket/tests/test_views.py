@@ -77,7 +77,9 @@ class TestBasketView(TestCase):
             {"productid": 2, "action": "post"},
             xhr=True,
         )
-        self.assertEqual(response.json(), {"qty": 1, "subtotal": "20.00"})
+        self.assertEqual(
+            response.json(), {"qty": 1, "total_price": "20.00", "success": True}
+        )
 
     def test_basket_update(self):
         """
@@ -88,4 +90,7 @@ class TestBasketView(TestCase):
             {"productid": 2, "productqty": 1, "action": "post"},
             xhr=True,
         )
-        self.assertEqual(response.json(), {"qty": 2, "subtotal": "40.00"})
+        self.assertEqual(
+            response.json(),
+            {"qty": 2, "total_price": "40.00", "success": True, "item_price": "20.00"},
+        )

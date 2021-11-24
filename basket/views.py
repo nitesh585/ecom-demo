@@ -48,7 +48,7 @@ def basket_update(request):
         product_qty = request.POST.get("productqty")
 
         item_price = str(basket.update(product_id=product_id, product_qty=product_qty))
-        print(type(item_price), item_price)
+        # print(type(item_price), item_price)
 
         response = JsonResponse(
             {
@@ -58,5 +58,5 @@ def basket_update(request):
                 "qty": basket.__len__(),
             }
         )
-        print(response)
+        # print(response)
         return response
