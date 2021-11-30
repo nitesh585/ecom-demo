@@ -1,14 +1,15 @@
 from django.contrib.auth import login, logout
-from django.shortcuts import redirect, render
-from django.contrib.sites.shortcuts import get_current_site
-from .forms import RegistrationForm
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import force_bytes, force_text
 from django.contrib.auth.decorators import login_required
-from .token import account_activation_token
+from django.contrib.sites.shortcuts import get_current_site
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
+from .forms import RegistrationForm
 from .models import UserBase
+from .token import account_activation_token
 
 
 @login_required
