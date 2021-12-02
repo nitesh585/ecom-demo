@@ -32,6 +32,10 @@ class Basket:
         self.save()
 
     def get_total_price(self):
+        """
+        get total price of product after multiplying
+        quantity with price.
+        """
         return sum(
             Decimal(item["price"]) * item["qty"] for item in self.basket.values()
         )
@@ -58,7 +62,9 @@ class Basket:
             return str(item_price)
 
     def __len__(self):
-        "get the basket data and count the qty of items"
+        """
+        get the basket data and count the qty of items
+        """
         return sum(item["qty"] for item in self.basket.values())
 
     def __iter__(self):
@@ -79,4 +85,8 @@ class Basket:
             yield item
 
     def save(self):
+        """
+        let session object notify that something is modified
+        in session data so that it can save data.
+        """
         self.session.modified = True

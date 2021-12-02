@@ -14,10 +14,25 @@ from .token import account_activation_token
 
 @login_required
 def dashboard(request):
+    """renders dashboard.html file
+
+    Args:
+        request (object)
+    """
     return render(request, "account/user/dashboard.html")
 
 
 def account_register(request):
+    """method to register the user and send them email of
+    activation token
+
+    Args:
+        request (obhect)
+
+    Returns:
+        [HttpResponse]: renders different html pages on the bases of 
+                        various conditions.
+    """
 
     if request.method == "POST":
         registerForm = RegistrationForm(request.POST)
@@ -48,6 +63,15 @@ def account_register(request):
 
 
 def account_activate(request, uidb64, token):
+    """method to activate account and login the user
+
+    Args:
+        request (object): 
+        uidb64 (string): dentifier that marks that particular record as unique
+        token (string): 
+
+    Returns: renders or re-directs to appropriate page.
+    """
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = UserBase.objects.get(pk=uid)

@@ -6,11 +6,27 @@ from store.models import Product
 
 
 def basket_summary(request):
+    """method used to load summary page of
+    current basket.
+
+    Args:
+        request ([object])
+
+    Returns: renders summary html page and send basket to it
+    """
     basket = Basket(request)
     return render(request, "store/basket/summary.html", {"basket": basket})
 
 
 def basket_add(request):
+    """method used to all product to basket
+
+    Args:
+        request ([object])
+
+    Returns:
+        [JsonResponse]: returns number of products in basket
+    """
     basket = Basket(request)
 
     if request.POST.get("action") == "post":
@@ -26,6 +42,15 @@ def basket_add(request):
 
 
 def basket_delete(request):
+    """method used to remove product from basket
+
+    Args:
+        request ([object])
+
+    Returns:
+        [JsonResponse]: returns total price and total number of
+                        products present in basket.
+    """
     basket = Basket(request)
 
     if request.POST.get("action") == "post":
@@ -43,6 +68,15 @@ def basket_delete(request):
 
 
 def basket_update(request):
+    """method responsible for updating the basket
+
+    Args:
+        request ([object])
+
+    Returns:
+        [JsonResponse]: returns updated item price of product and
+                        total price and quantity of basket.
+    """
     basket = Basket(request)
     if request.POST.get("action") == "post":
         product_id = request.POST.get("productid")
