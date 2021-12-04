@@ -53,3 +53,5 @@ coverage.xml
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+*node_modules/
