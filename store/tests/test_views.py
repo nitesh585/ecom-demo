@@ -1,7 +1,4 @@
-from unittest.case import skip
-
 from django.contrib.auth.models import User
-from django.http.request import HttpRequest
 from django.test import Client, TestCase
 from django.test.client import RequestFactory
 from django.urls import reverse
@@ -11,12 +8,11 @@ from store.views import *
 from ..models import Category, Product
 
 
-# @skip("simulating skipping the testcase during unittest")
 class TestSkip(TestCase):
-    # def test_skip():
-    #     pass
-
     def setUp(self) -> None:
+        """create user and category that is going to be
+        used in the test cases
+        """
         self.client = Client()
         self.factory = RequestFactory()
         User.objects.create(username="admin")
@@ -49,26 +45,6 @@ class TestSkip(TestCase):
         response = self.client.get(reverse("store:category_details", args=["book"]))
 
         self.assertEqual(response.status_code, 200)
-
-    # def test_homepage_html(self):
-    #     """Test Homepage HTML"""
-
-    #     request = HttpRequest()
-    #     response = all_products(request)
-    #     html = response.content.decode("utf-8")
-
-    #     self.assertTrue(html.startswith("\n<!DOCTYPE html>\n"))
-    #     self.assertEqual(response.status_code, 200)
-
-    # def test_view_function(self):
-    #     """Test Homepage HTML using FactoryRequest"""
-
-    #     request = self.factory.get("/machine-learning")
-    #     response = all_products(request)
-    #     html = response.content.decode("utf-8")
-
-    #     self.assertTrue(html.startswith("\n<!DOCTYPE html>\n"))
-    #     self.assertEqual(response.status_code, 200)
 
     def test_url_allowed_hosts(self):
         """Test Allowed Hosts"""
