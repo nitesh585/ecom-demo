@@ -1,49 +1,50 @@
 {% extends "./base.html" %} {% load static %} {% block title %} Home
 {%endblock%} {% block content %}
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Welcome to Store</h1>
-      <p class="lead text-muted">
-        The shop where you can buy anything with great deal.
-      </p>
-      <p>
-        <a href="/#" class="btn btn-danger my-2">Create an account</a>
-      </p>
-    </div>
+<div class="">
+  <h1 class="font-serif text-8xl text-center text-red-500 uppercase">Welcome to Store</h1>
+  <p class="font-semibold text-3xl text-center uppercase">
+    The shop with great deal!
+  </p>
+  <div class="flex flex-wrap justify-center pb-10">
+    <button
+      href="/#"
+      class="bg-yellow-500 hover:bg-yellow-200 rounded-full w-96 h-14"
+    >
+      Create an account
+    </button>
   </div>
-</section>
+</div>
 <section>
   <div class="container">
-    <h2 class="bg-danger text-light p-2 ml-4 text-uppercase">All Books</h2>
+    <h2 class="bg-red-500 rounded-t-full text-center p-2 font-semibold font-sans text-gray-100 text-3xl">All Books</h2>
     <hr />
-    <div class="d-flex" >
-    {% for product in products %}
-    <div class="card" style="width: 50vh">
-      <div class="row">
-        <div class="col-md-5">
-          <img
-            src="{{product.image.url}}"
-            class="img-thumbnail"
-            alt="loading..."
-          />
-        </div>
-        <div class="col-md-7">
-          <div class="card-body"></div>
-          <a
-            class="card-title text-dark text-decoration-none"
-            style="font-size: 140%"
-            href="{{product.get_absolute_url}}"
-            >{{ product.title }}</a
-          >
-          <a href="#" class="btn btn-success p-1" style="width: 80%"
-            >{% if product.in_stock %} In Stock {%else%}Out of Stock{%endif%}
-          </a>
+    <div class="d-flex">
+      {% for product in products %}
+      <div class="card" style="width: 50vh">
+        <div class="row">
+          <div class="col-md-5">
+            <img
+              src="{{product.image.url}}"
+              class="img-thumbnail"
+              alt="loading..."
+            />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body"></div>
+            <a
+              class="card-title text-dark text-decoration-none"
+              style="font-size: 140%"
+              href="{{product.get_absolute_url}}"
+              >{{ product.title }}</a
+            >
+            <a href="#" class="btn btn-success p-1" style="width: 80%"
+              >{% if product.in_stock %} In Stock {%else%}Out of Stock{%endif%}
+            </a>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
   </div>
 </section>
 {% endblock %}
