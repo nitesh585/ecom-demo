@@ -72,10 +72,12 @@ def account_activate(request, uidb64, token):
 
     Returns: renders or re-directs to appropriate page.
     """
+    print("active......................................")
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = UserBase.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, user.DoesNotExist):
+    except Exception as err:
+        print(err)
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
