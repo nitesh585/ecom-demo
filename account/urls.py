@@ -23,4 +23,9 @@ urlpatterns = [
         auth_views.LogoutView.as_view(next_page="/account/login/"),
         name="logout",
     ),
+    path(
+        "editDetails/",
+        views.account_edit_details,
+        name="editDetails",
+    ),
 ]

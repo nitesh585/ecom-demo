@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, UserEditForm
 from .models import UserBase
 from .token import account_activation_token
 
@@ -30,7 +30,7 @@ def account_register(request):
         request (obhect)
 
     Returns:
-        [HttpResponse]: renders different html pages on the bases of 
+        [HttpResponse]: renders different html pages on the bases of
                         various conditions.
     """
 
@@ -66,9 +66,9 @@ def account_activate(request, uidb64, token):
     """method to activate account and login the user
 
     Args:
-        request (object): 
+        request (object):
         uidb64 (string): dentifier that marks that particular record as unique
-        token (string): 
+        token (string):
 
     Returns: renders or re-directs to appropriate page.
     """
@@ -86,3 +86,18 @@ def account_activate(request, uidb64, token):
         return redirect("account:dashboard")
     else:
         return render(request, "account/registration/activation_invalid.html")
+
+
+@login_required
+def account_edit_details(request):
+    """method to update the username"""
+
+    if request.method == "POST":
+        userForm = UserEditForm(instance=request.user, data=request.POST)
+        if userForm.is_valid():
+            userForm.save()
+
+    else:
+        userForm = UserEditForm(instance=request.user)
+
+    return render(request, "account/user/edit_detail.html", {"form": userForm})

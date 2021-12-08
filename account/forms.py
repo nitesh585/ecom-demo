@@ -127,3 +127,55 @@ class RegistrationForm(forms.ModelForm):
         self.fields["password2"].widget.attrs.update(
             {"class": "form-control", "placeholder": "Repeat Password"}
         )
+
+
+class UserEditForm(forms.ModelForm):
+    """edit-details model form class module
+    that validates the user input in the form
+    """
+
+    email = forms.EmailField(
+        label="Account email (can not be changed)",
+        max_length=100,
+        help_text="Required",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "email",
+                "id": "form-firstName",
+                "readonly": "readonly",
+            }
+        ),
+    )
+
+    user_name = forms.CharField(
+        label="FirstName",
+        min_length=4,
+        max_length=50,
+        help_text="Required",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control mb-3",
+                "placeholder": "Username",
+                "id": "form-firstName",
+            }
+        ),
+    )
+
+    class Meta:
+        """used to change the behavior of your model fields
+        like changing order options,verbose_name and lot of other options.
+        It's completely optional to add Meta class in your model.
+        """
+
+        model = UserBase
+        fields = (
+            "email",
+            "user_name",
+        )
+
+    def __init__(self, *args, **kwargs):
+        """constructor method to define different widget
+        attributes"""
+        super().__init__(*args, **kwargs)
+        self.fields["user_name"].required = True
