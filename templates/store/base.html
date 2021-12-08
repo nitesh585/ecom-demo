@@ -66,6 +66,19 @@
             </li>
           </ul>
         </div>
+
+        {% if user.is_authenticated %}
+        <a type="button" role="button" href="{% url "account:logout" %}"
+            class="no-underline flex mr-6 text-gray-600 basket-btn hover:text-gray-400">
+            <span>Logout</span>
+        </a>
+        {% else %}
+        <a type="button" role="button" href="{% url "account:login" %}"
+        class="no-underline flex mr-6 text-gray-600 basket-btn hover:text-gray-400">
+            <span>Login</span>
+        </a>
+        {% endif %}
+
         <div class="flex w-14 justify-between">
             {% with total_qty=basket|length %}
                 <p id="basket-qty" class="font-bold">
@@ -95,7 +108,7 @@
       </div>
     </nav>
 
-    <div id="content" >{% block content %} {% endblock %}</div>
+    <div class="w-full h-full" id="content" >{% block content %} {% endblock %}</div>
    
     <footer class="w-screen bg-gray-800">
         <div class="flex justify-evenly p-6">
