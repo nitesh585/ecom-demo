@@ -1,0 +1,40 @@
+{% extends "../../store/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block content %}
+
+<div class="flex justify-center mt-20 w-full">
+    <div class="flex flex-col w-2/6 flex-wrap">
+        <form class="p-4 rounded" action="{% url 'account:login' %}" method="post">
+            {% csrf_token %}
+            <h3 class="mb-4">Sign In</h3>
+
+            {% if form.errors %}
+            <div class="border-none p-3 text-red-600 mb-2 bg-red-100" role="alert">
+                Error: Username or Password not correct!
+            </div>
+            {% endif %}
+
+            <label class="form-label">{{ form.username.label}}</label>
+            {{ form.username}}
+
+            <label class="form-label">{{ form.password.label}}</label>
+            {{ form.password}}
+            <div class="flex justify-between flex-col">
+                <input type="hidden" name="next" value="{{ next }}">
+                <button class="bg-blue-600 p-2 rounded-md text-white mt-4" type="submit" value="Log-in">Sign in
+                </button>
+            </div>
+            <p class="text-center pt-2">
+                <a class="no-underline text-md" href="{% url "account:register" %}">Create an account</a>
+            </p>
+        </form>
+        <p class="pt-4">
+            {% comment %} <a href="{% url "password_reset" %}">Forgotten Password?</a> {% endcomment %}
+        </p>
+        <p class="">
+            {% comment %} <a href="{% url "accounts:register" %}">Help Center?</a> {% endcomment %}
+        </p>
+    </div>
+</div>
+
+{% endblock %}
