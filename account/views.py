@@ -101,3 +101,13 @@ def account_edit_details(request):
         userForm = UserEditForm(instance=request.user)
 
     return render(request, "account/user/edit_detail.html", {"form": userForm})
+
+
+@login_required
+def delete_user(request):
+    "delete the user account by making it not active in db"
+    user = UserBase.objects.get(user_name=request.user)
+    user.is_active = False
+    user.save()
+    logout(request)
+    return redirect("account:delete_confirmation")
