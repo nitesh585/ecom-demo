@@ -1,0 +1,17 @@
+{% extends "../../store/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block content %}
+
+<div class="flex justify-center w-full">
+    <div class="flex flex-col w-2/6 p-4">
+        {% if 'email' in request.get_full_path %}
+                <h3 class="mb-4">Password Reset Success</h3>
+                <p>Check your email for instructions</p>
+        {% endif%}
+        {% if 'complete' in request.get_full_path %}
+                <h3 class="mb-4">Password Reset Success</h3>
+                <a href="{% url "account:login" %}">Login</a>
+        {% endif%}
+    </div>       
+</div>       
+{% endblock %}

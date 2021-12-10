@@ -28,6 +28,13 @@
                 <a class="no-underline text-md" href="{% url "account:dashboard" %}">back to dashboard</a>
             </p>
         </form>
+        <form class="p-4" action="{% url "account:delete_user" %}" method="post">
+            {% csrf_token %}
+            <h3>Delete Account</h3>
+            <p>Are you sure you want to delete your account?</p>
+            <button type="submit" role="button"
+                class="bg-red-600 text-white p-2 rounded-md w-full">Delete</button>
+        </form>
     </div>
 </div>
 
