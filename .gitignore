@@ -55,3 +55,8 @@ coverage.xml
 .history
 
 *node_modules/
+
+jstools/
+static/css/style.css
+static/css/style.min.css
+
