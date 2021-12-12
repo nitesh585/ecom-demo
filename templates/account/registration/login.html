@@ -24,13 +24,16 @@
                 <button class="bg-blue-600 p-2 rounded-md text-white mt-4" type="submit" value="Log-in">Sign in
                 </button>
             </div>
-            <p class="text-center pt-2">
-                <a class="no-underline text-md" href="{% url "account:register" %}">Create an account</a>
-            </p>
+            <div class="flex w-full justify-between p-2" >
+                <p class="">
+                    <a class="no-underline" href="{% url "account:register" %}">Create an account</a>
+                </p>
+                <p class="">
+                    <a class="no-underline" href="{% url "account:pwdreset" %}">Forgotten Password?</a>
+                </p>
+            </div>
         </form>
-        <p class="pt-4">
-            {% comment %} <a href="{% url "password_reset" %}">Forgotten Password?</a> {% endcomment %}
-        </p>
+
         <p class="">
             {% comment %} <a href="{% url "accounts:register" %}">Help Center?</a> {% endcomment %}
         </p>

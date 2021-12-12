@@ -2,95 +2,48 @@
 {% block title %}Register{% endblock %}
 {% block content %}
 
-<style>
-    .account-form input {
-        border: 2px solid #ccc;
-        height: calc(2em + .75rem + 2px);
-    }
+<div class="flex w-full mt-12 justify-center">
+    <div class="flex flex-col flex-wrap w-2/6" >
+        <form action="." method="post">
+            {% csrf_token %}
+            <h3 >Create an account</h3>
+            <p class="mb-8">It's free and only takes a minute.</p>
 
-    .account-form input:focus {
-        border-color: #1497ff;
-        box-shadow: none;
-    }
-</style>
-
-<div class="container-fluid">
-    <div class="row no-gutter">
-        <div class="col-md-12">
-            <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-lg-7  mx-auto">
-                             <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
-                                {% csrf_token %}
-                                <h3 class="mb-2 font-weight-bold">Create an account</h3>
-                                <p class="mb-4">It's free and only takes a minute.</p>
-
-                                {% if form.errors %}
-                                <p>Please correct the following errors:</p>
-                                {% for field in form %}
-                                {% if field.errors %}
-                                <div class="alert alert-primary" role="alert">
-                                    {{ field.label }}: {{ field.errors|striptags }}
-                                </div>
-                                {% endif %}
-                                {% endfor %}
-                                {% endif %}
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>{{ form.user_name.label }}<span class="text-muted small">
-                                            (Required)</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        {{ form.user_name }}
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>{{ form.email.label}}<span class="text-muted small">
-                                                (Required)</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        {{ form.email }}
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>{{ form.password.label}}<span class="text-muted mb-4">
-                                                </span></label>
-                                        <small class="form-text text-muted mb-4 small">
-                                            (At least 8 characters and 1 digit)
-                                        </small>
-                                    </div>
-                                    <div class="col-6">
-                                        {{ form.password }}
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>{{ form.password2.label}}<span class="text-muted small">
-                                                (Required)</span></label>
-                                    </div>
-                                    <div class="col-6">
-                                        {{ form.password2 }}
-                                    </div>
-                                </div>
-
-
-                                <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">Register</button>
-                                <p class="text-center">
-                                    <a href="">Already have an account?</a>
-                                </p>
-                            </form>
+            {% if form.errors %}
+                <p>Please correct the following errors:</p>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="border-none p-3 text-red-600 mb-2 bg-red-100" role="alert">
+                            {{ field.label }}: {{ field.errors|striptags }}
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+            <label class="pb-2" >{{ form.user_name.label }}
+                (Required)</label>
+            {{ form.user_name }}
+
+            <label class="pb-2">{{ form.email.label}}
+                    (Required)</label>
+            {{ form.email }}
+
+            <label class="pb-2">{{ form.password.label}}
+                (At least 8 characters and 1 digit)
+            </label>
+            {{ form.password }}
+
+            <label class="pb-2">{{ form.password2.label}}
+                    (Required)</label>
+            {{ form.password2 }}
+
+            <button class="bg-blue-600 p-2 rounded-md text-white w-full mt-4" type="submit">Register</button>
+            <p class="text-center pt-2">
+                <a class="no-underline" href="{% url 'account:login' %}">Already have an account?</a>
+            </p>
+        </form>
     </div>
 </div>
+
 {% endblock %}
