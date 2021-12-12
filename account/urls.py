@@ -55,4 +55,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="account/user/reset_status.html"),
         name="password_reset_done",
     ),
+    path(
+        "password_reset_confirm/MTA/password_reset_complete/",
+        TemplateView.as_view(template_name="account/user/reset_status.html"),
+        name="password_reset_complete",
+    ),
+
 ]
