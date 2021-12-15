@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "basket",
     "account",
     "payment",
+    "orders"
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ LOGIN_URL = "/account/login/"
 
 # Email setting
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+STRIPE_ENDPOINT_SECRET = "whsec_qtINXqPx5kGRcGR5C4nSpqEzDv3nGSRt"

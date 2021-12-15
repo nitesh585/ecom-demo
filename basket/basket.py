@@ -90,3 +90,7 @@ class Basket:
         in session data so that it can save data.
         """
         self.session.modified = True
+
+    def clear(self):
+        del self.session["skey"]
+        self.save()
