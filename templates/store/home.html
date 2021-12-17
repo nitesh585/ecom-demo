@@ -1,45 +1,102 @@
 {% extends "./base.html" %} {% load static %} {% block title %} Home
 {%endblock%} {% block content %}
 <div class="">
-  <h1 class="font-serif text-8xl text-center text-red-500 uppercase">Welcome to Store</h1>
+  <h1 class="font-serif text-8xl text-center text-red-500 uppercase">
+    Welcome to Store
+  </h1>
   <p class="font-semibold text-3xl text-center uppercase">
     The shop with great deal!
   </p>
   <div class="flex flex-wrap justify-center pb-10">
     <button
       href="/#"
-      class="bg-yellow-500 hover:bg-yellow-200 rounded-full w-96 h-14"
+      class="bg-yellow-400 hover:bg-yellow-300 rounded-full w-96 h-14"
     >
       Create an account
     </button>
   </div>
 </div>
 <section>
-  <div class="container">
-    <h2 class="bg-red-500 rounded-t-full text-center p-2 font-semibold font-sans text-gray-100 text-3xl">All Books</h2>
+  <div class="w-screen pl-16 pr-16">
+    <h2
+      class="
+        bg-red-500
+        rounded-t-full
+        text-center
+        p-2
+        font-semibold font-sans
+        text-gray-100 text-3xl
+      "
+    >
+      All Books
+    </h2>
     <hr />
-    <div class="d-flex">
+    <div class="flex justify-between flex-wrap w-full">
       {% for product in products %}
-      <div class="card" style="width: 50vh">
-        <div class="row">
-          <div class="col-md-5">
-            <img
-              src="{{product.image.url}}"
-              class="img-thumbnail"
-              alt="loading..."
-            />
-          </div>
-          <div class="col-md-7">
-            <div class="card-body"></div>
+      <div
+        class="
+          bg-white
+          border-4 border-gray-100
+          rounded-b-3xl
+          mb-4
+          w-72
+          hover:w-80
+        "
+      >
+        <a href="{{product.get_absolute_url}}">
+          <img
+            src="{{product.image.url}}"
+            class="w-full h-72"
+            alt="loading..."
+          />
+        </a>
+        <div class="rounded-md relative flex-col">
+          <p
+            class="
+              rounded-l-lg
+              text-white
+              font-bold
+              border-gray-300 border-2
+              w-24
+              p-2
+              text-center
+              hover:w-36
+              absolute
+              -right-1
+              -top-64
+              bg-black
+            "
+          >
+            ${{product.price}}
+          </p>
+          <div class="pt-2 pb-1 text-center">
             <a
-              class="card-title text-dark text-decoration-none"
-              style="font-size: 140%"
+              class="
+                font-serif
+                text-gray-700 text-decoration-none
+                font-bold
+                text-2xl
+                hover:text-gray-900
+              "
               href="{{product.get_absolute_url}}"
               >{{ product.title }}</a
             >
-            <a href="#" class="btn btn-success p-1" style="width: 80%"
-              >{% if product.in_stock %} In Stock {%else%}Out of Stock{%endif%}
-            </a>
+          </div>
+          <div
+            class="flex border-t-2 pt-2 justify-between pb-2 w-full pl-10 pr-10"
+          >
+            <i
+              style="font-size: 22px"
+              class="fa fa-heart text-gray-400 hover:text-red-600"
+            ></i>
+            <i
+              style="font-size: 22px"
+              class="fa fa-comment text-gray-300 hover:text-gray-800"
+            ></i>
+            <i
+              style="font-size: 22px"
+              class="fa fa-share text-gray-400 hover:text-blue-600"
+            ></i>
           </div>
         </div>
       </div>
