@@ -1,47 +1,71 @@
 {% extends "./base.html" %} {% load static %} {% block title %} Home
 {%endblock%} {% block content %}
-<div class="">
-  <h1 class="font-serif text-8xl text-center text-red-500 uppercase">
-    Welcome to Store
-  </h1>
-  <p class="font-semibold text-3xl text-center uppercase">
-    The shop with great deal!
-  </p>
-  <div class="flex flex-wrap justify-center pb-10">
-    <button
-      href="/#"
-      class="bg-yellow-400 hover:bg-yellow-300 rounded-full w-96 h-14"
-    >
-      Create an account
-    </button>
-  </div>
-</div>
-<section>
-  <div class="w-screen pl-16 pr-16">
-    <h2
+
+<style>
+  .product_card:hover {
+    transform: scale(1.05);
+    transition: all 0.2s ease-out;
+  }
+  .product_card:hover::before {
+    content: "In Stock";
+    color: green;
+    font-weight: bold;
+  }
+</style>
+<div class="relative overflow-hidden w-screen shadow-lg cursor-pointer">
+  <img alt="loading..." class="w-screen opacity-80" src="/media/catStudy.jpg" />
+
+  <div class="absolute top-0 left-0 ml-20 mt-10">
+    <h4
       class="
-        bg-red-500
-        rounded-t-full
-        text-center
-        p-2
-        font-semibold font-sans
-        text-gray-100 text-3xl
+        mb-3
+        text-4xl
+        animate-bounce
+        font-sans font-semibold
+        tracking-tight
+        text-white
       "
     >
-      All Books
-    </h2>
+      Welcome to Store!
+    </h4>
+    <p class="leading-normal text-1xl text-gray-100">
+      The shop with great deal.
+    </p>
+    <div class="text-gray-600">
+      <input
+        class="
+          border-2 border-gray-300
+          bg-white
+          h-10
+          px-9
+          rounded-lg
+          text-sm
+          focus:outline-none
+        "
+        type="search"
+        name="search"
+        placeholder="Search"
+      />
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="w-screen pl-16 pt-10 pr-16">
     <hr />
     <div class="flex justify-between flex-wrap w-full">
-      {% for product in products %}
+      {% for product in products %} 
       <div
         class="
+          product_card
           bg-white
-          border-4 border-gray-100
+          border-4 border-gray-300
           rounded-b-3xl
           mb-4
+          p-2
           w-72
-          hover:w-80
         "
+        data-description="{{product.description}}"
       >
         <a href="{{product.get_absolute_url}}">
           <img
