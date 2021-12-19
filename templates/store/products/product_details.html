@@ -1,48 +1,60 @@
 {% extends '../base.html' %} {% block content %}
 
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-      <div class="card border-0 mt-5" style="width: 150vh">
-        <div class="row">
-          <div class="col-5">
-            <img class="card-img" src="{{product.image.url}}" alt="Vans" />
-          </div>
-          <div class="col-7">
-            <div class="card-body">
-              <h4 class="card-title">{{product.title}}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">
-                Author: {{product.author}}
-              </h6>
-              <p class="card-text">{{product.description}}</p>
+<div class="flex bg-gray-200 flex-wrap mx-20 my-20">
+  <div class="flex-col flex-wrap bg-green-700 p-20">
+    <img
+      class="w-96 h-96 shadow-lg border-8 border-white"
+      src="{{product.image.url}}"
+      alt="Vans"
+    />
+    <h4
+      class="pt-10 text-gray-100 font-mono leading-tight text-center text-4xl"
+    >
+      {{product.title}}
+    </h4>
+    <h6 class="text-gray-200 font-mono leading-tight text-center text-xl">
+      Author: {{product.author}}
+    </h6>
+  </div>
 
-              <label for="select">Qty</label>
-              <select id="select">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-              <div
-                class="buy d-flex justify-content-between align-items-center"
-              >
-                <div class="price text-success">
-                  <h5 class="mt-4">Price: ${{product.price}}</h5>
-                </div>
+  <div
+    class="
+      details
+      m-10
+      text-2xl
+      font-normal
+      leading-loose
+      tracking-wider
+      font-serif
+    "
+    style="width: 65rem"
+  >
+    <p class="">{{product.description}}</p>
 
-                <button
-                  class="btn btn-warning mt-3"
-                  type="button"
-                  id="add-button"
-                  value="{{product.id}}"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <label class="font-bold text-3xl" for="select">Qty:</label>
+    <select class="w-44 bg-gray-700 text-white py-1" id="select">
+      <option class="bg-green-600" value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <div class="buy">
+      <div class="price">
+        <h5 class="font-bold text-green-800 text-3xl mt-4">Price: ${{product.price}}</h5>
       </div>
+
+      <button
+        class="border-2 font-bold rounded-md border-gray-400 pl-2 pr-8"
+        type="button"
+        id="add-button"
+        value="{{product.id}}"
+      >
+        <i
+          style="font-size: 36px"
+          class="fa fa-shopping-cart text-gray-600 pr-2 hover:text-gray-800"
+        ></i>
+        Add to Cart
+      </button>
     </div>
   </div>
 </div>
