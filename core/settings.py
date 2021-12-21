@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-@d-g1joryfiti&64qff66d-3@fs-9u!p%dj-$t0u_x&)m4gfsj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "basket",
     "account",
     "payment",
-    "orders",
+    "orders"
 ]
 
 MIDDLEWARE = [
@@ -56,8 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
-# WHITENOISE_USE_FINDERS = True
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
@@ -148,6 +146,3 @@ LOGIN_URL = "/account/login/"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 STRIPE_ENDPOINT_SECRET = "whsec_qtINXqPx5kGRcGR5C4nSpqEzDv3nGSRt"
-
-
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
