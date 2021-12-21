@@ -3,8 +3,8 @@
     Dashboard   
 {% endblock title %} 
 {% block content %} 
-    <div class="flex flex-col h-full">
-        <p>Welcome to Store!!</p>
-        <a class="no-underline"  href="{% url 'account:editDetails' %}">change details</a>    
+    <div class="flex w-full justify-between">
+        <p class="p-3 text-2xl"><a class="no-underline" href="{% url 'store:all_products' %}">Go to Homepage</a></p>
+        <a class="no-underline p-3"  href="{% url 'account:editDetails' %}">change details</a>    
     </div>
 {% endblock content %}
