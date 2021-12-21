@@ -1,11 +1,12 @@
-<p align="center" style="font-size:48px; font-weight:550" > ecom-demo</p>
+<h1 align="center" >ecom-demo</h1>
 
 [Ecom-Demo-Preview](https://drive.google.com/file/d/12eHbRAD4pYCgHngu_gJ678hgK7oYwgxk/view?usp=sharing)
 
 -----------------------------------------
 This is a baseline eCommerce application that you can use to build your own online store.
+
 Used frameworks/languages and tools are:
-|                                                                                                                                                               |                                                                                                                                                                       |
+|                                                                                                                                                          |                                                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |                                                                                                                                                               |
 | <img style="width:15px" src="https://img.stackshare.io/service/994/4aGjtNQv.png"> Django                                                                      | <img style="width:15px" src="https://www.drupal.org/files/project-images/screenshot_361.png"> Tailwind CSS                                                            |
@@ -30,8 +31,8 @@ Table of Content:
 - The first thing to do is to clone the repository:
 
 ```sh
-$ git clone https://github.com/nitesh585/ecom-demo.git
-$ cd ecom-demo
+> git clone https://github.com/nitesh585/ecom-demo.git
+> cd ecom-demo
 ```
 ----------------------------------------------------
 ### Virtual environment setup
@@ -39,14 +40,14 @@ $ cd ecom-demo
 - Create a virtual environment to install dependencies in and activate it:
 
 ```sh
-$ virtualenv venv
-$ . venv/bin/activate
+> virtualenv venv
+> . venv/bin/activate
 ```
 
 - Then install the dependencies:
 
 ```sh
-(venv)$ pip install -r requirements.txt
+(venv)> pip install -r requirements.txt
 ```
 Note the `(venv)` in front of the prompt. This indicates that this terminal
 session operates in a virtual environment set up by `virtualenv`.
@@ -121,7 +122,7 @@ now make a Tailwind entry point in static/css/tailwind.css
 ```
 
 We are ready to build.
-```
+```sh
 > npm run build
 ```
 This command will generate two files: styles.css and styles.min.css
